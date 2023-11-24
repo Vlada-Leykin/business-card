@@ -1,4 +1,4 @@
-import {mergeSort} from '../src/exercises/recursion/mergesort.js';
+import mergeSort from '../src/exercises/recursion/mergesort.js';
 
 describe('minimal cases', function() {
   it('should return empty array', function() {

@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "jasmine",
-    "lint": "eslint ./src"
+    "lint": "eslint ./src",
+    "lint-fix": "eslint ./src --fix --color"
   },
   "author": "Vlada Leykin",
   "license": "ISC",
