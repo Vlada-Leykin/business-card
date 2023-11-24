@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+</html>
+<body>
+  <p>Card manipulator </p>
+  <button type="button" name="button" onclick="showQty()">show quantity</button>
+  <button type="button" name="button" onclick="addToCart(1)">add to card</button>
+  <button type="button" name="button" onclick="addToCart(2)">+2</button>
+  <button type="button" name="button" onclick="addToCart(3)">+3</button>
+  <button type="button" name="button" onclick="resetCart()">reset</button>
+<script type="text/javascript">
+    cartQuantity = 0;
+    let addToCart = (Qty) => cartQuantity = cartQuantity + Qty;
+    let resetCart = () => cartQuantity = 0;
+    let showQty = () => console.log(cartQuantity);
+</script>
+</body>
