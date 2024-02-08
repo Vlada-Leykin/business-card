@@ -28,7 +28,7 @@ const merge = (leftArr, rightArr) => {
 };
 
 // receives an array of numbers and returns them in a sorted order
-// time compexity ...
+// time compexity O(nlogn)
 export default function mergeSort(arrToSort) {
   const lengthOfArr = arrToSort.length;
   const smallestArray = lengthOfArr === 0 || lengthOfArr === 1;
