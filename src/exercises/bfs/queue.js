@@ -7,13 +7,13 @@ class Queue {
 
   enqueue(item) {
     this.items[this.tailIndex] = item;
-    this.tailIndex++;
+    this.tailIndex += 1;
   }
 
   dequeue() {
     const item = this.items[this.headIndex];
     delete this.items[this.headIndex];
-    this.headIndex++;
+    this.headIndex += 1;
     return item;
   }
 

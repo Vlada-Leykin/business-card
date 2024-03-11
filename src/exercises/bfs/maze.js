@@ -1,5 +1,9 @@
+/* eslint-disable import/extensions */
 import Queue from './queue.js';
 import Graph from './graph.js';
+
+const convertNodeToString = (nodeAsArr) => nodeAsArr.toString();
+const convertNodeToArr = (nodeAsStr) => [Number(nodeAsStr[0]), Number(nodeAsStr[2])];
 
 // let maze = [
 //     [1,1,1,1,1],
@@ -9,38 +13,23 @@ import Graph from './graph.js';
 //     [1,0,0,0,0],
 //     [1,1,1,1,1],
 // ];
-  // AdjacencyList
-  // Map(11) {
-  //   '1,0' => Set(1) { '1,1' },
-  //   '1,1' => Set(2) { '1,0', '2,1' },
-  //   '1,3' => Set(1) { '2,3' },
-  //   '2,1' => Set(2) { '1,1', '2,2' },
-  //   '2,2' => Set(3) { '2,1', '3,2', '2,3' },
-  //   '2,3' => Set(2) { '1,3', '2,2' },
-  //   '3,2' => Set(2) { '2,2', '4,2' },
-  //   '4,1' => Set(1) { '4,2' },
-  //   '4,2' => Set(3) { '3,2', '4,1', '4,3' },
-  //   '4,3' => Set(2) { '4,2', '4,4' },
-  //   '4,4' => Set(1) { '4,3' }
-  // }
 
+// AdjacencyList
+// Map(11) {
+//   '1,0' => Set(1) { '1,1' },
+//   '1,1' => Set(2) { '1,0', '2,1' },
+//   '1,3' => Set(1) { '2,3' },
+//   '2,1' => Set(2) { '1,1', '2,2' },
+//   '2,2' => Set(3) { '2,1', '3,2', '2,3' },
+//   '2,3' => Set(2) { '1,3', '2,2' },
+//   '3,2' => Set(2) { '2,2', '4,2' },
+//   '4,1' => Set(1) { '4,2' },
+//   '4,2' => Set(3) { '3,2', '4,1', '4,3' },
+//   '4,3' => Set(2) { '4,2', '4,4' },
+//   '4,4' => Set(1) { '4,3' }
+// }
 
-  // parentLink
-  // {
-  //   '1,1': '1,0',
-  //   '2,1': '1,1',
-  //   '2,2': '2,1',
-  //   '3,2': '2,2',
-  //   '2,3': '2,2',
-  //   '4,2': '3,2',
-  //   '1,3': '2,3',
-  //   '4,1': '4,2',
-  //   '4,3': '4,2',
-  //   '4,4': '4,3'
-  // }
-
-
-function solve(adjacencyList, start) {
+function getParentLinkMapWithBFS(adjacencyList, start) {
   const queue = new Queue();
   queue.enqueue(start.toString());
 
@@ -53,7 +42,7 @@ function solve(adjacencyList, start) {
     const currNode = queue.dequeue();
     const neighboursOfCurrentNode = adjacencyList.getNeighboors(currNode);
 
-    neighboursOfCurrentNode.forEach(node => {
+    neighboursOfCurrentNode.forEach((node) => {
       if (!visited[node]) {
         queue.enqueue(node);
         visited[node] = true;
@@ -65,12 +54,34 @@ function solve(adjacencyList, start) {
   return parentLink;
 }
 
-function constructPath(prev) {
-  return [];
+// parentLinkMap
+// {
+//   '1,1': '1,0',
+//   '2,1': '1,1',
+//   '2,2': '2,1',
+//   '3,2': '2,2',
+//   '2,3': '2,2',
+//   '4,2': '3,2',
+//   '1,3': '2,3',
+//   '4,1': '4,2',
+//   '4,3': '4,2',
+//   '4,4': '4,3'
+// }
+function constructPath(parentLinkMap, start, end) {
+  const result = [];
+  let currNodeStr = convertNodeToString(end);
+
+  while (currNodeStr !== start.toString()) {
+    result.push(currNodeStr);
+    currNodeStr = parentLinkMap[currNodeStr];
+  }
+  result.push(convertNodeToString(start));
+  const reversedPath = result.reverse();
+  return reversedPath.map((item) => convertNodeToArr(item));
 }
 
 function convertMazeToAdjacencyList(maze) {
-  let adjacencyList = new Graph();
+  const adjacencyList = new Graph();
 
   maze.forEach((row, i) => {
     row.forEach((elem, j) => {
@@ -104,6 +115,6 @@ function convertMazeToAdjacencyList(maze) {
 
 export default function solveMaze(maze, start, end) {
   const adjacencyList = convertMazeToAdjacencyList(maze);
-  const parentLinkedMap = solve(adjacencyList, start);
-  return constructPath(parentLinkedMap);
+  const parentLinkedMap = getParentLinkMapWithBFS(adjacencyList, start);
+  return constructPath(parentLinkedMap, start, end);
 }
