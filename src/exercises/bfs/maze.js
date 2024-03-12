@@ -5,7 +5,8 @@ import Graph from './graph.js';
 const convertNodeToString = (nodeAsArr) => nodeAsArr.toString();
 const convertNodeToArr = (nodeAsStr) => [Number(nodeAsStr[0]), Number(nodeAsStr[2])];
 
-// let maze = [
+// Maze format
+// [
 //     [1,1,1,1,1],
 //     [0,0,1,0,1],
 //     [1,0,0,0,1],
@@ -14,7 +15,7 @@ const convertNodeToArr = (nodeAsStr) => [Number(nodeAsStr[0]), Number(nodeAsStr[
 //     [1,1,1,1,1],
 // ];
 
-// AdjacencyList
+// AdjacencyList format
 // Map(11) {
 //   '1,0' => Set(1) { '1,1' },
 //   '1,1' => Set(2) { '1,0', '2,1' },
@@ -54,7 +55,7 @@ function getParentLinkMapWithBFS(adjacencyList, start) {
   return parentLink;
 }
 
-// parentLinkMap
+// parentLinkMap format
 // {
 //   '1,1': '1,0',
 //   '2,1': '1,1',
@@ -68,9 +69,13 @@ function getParentLinkMapWithBFS(adjacencyList, start) {
 //   '4,4': '4,3'
 // }
 function constructPath(parentLinkMap, start, end) {
-  const result = [];
   let currNodeStr = convertNodeToString(end);
+  const endNodeWasDiscovered = parentLinkMap[currNodeStr];
+  if (!endNodeWasDiscovered) {
+    return [];
+  }
 
+  const result = [];
   while (currNodeStr !== start.toString()) {
     result.push(currNodeStr);
     currNodeStr = parentLinkMap[currNodeStr];
