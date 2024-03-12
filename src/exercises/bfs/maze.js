@@ -2,8 +2,8 @@
 import Queue from './queue.js';
 import Graph from './graph.js';
 
-const convertNodeToString = (nodeAsArr) => nodeAsArr.toString();
-const convertNodeToArr = (nodeAsStr) => [Number(nodeAsStr[0]), Number(nodeAsStr[2])];
+const nodeAsString = (nodeAsArr) => nodeAsArr.toString();
+const nodeAsArray = (nodeAsStr) => [Number(nodeAsStr[0]), Number(nodeAsStr[2])];
 
 // Maze format
 // [
@@ -69,7 +69,7 @@ function getParentLinkMapWithBFS(adjacencyList, start) {
 //   '4,4': '4,3'
 // }
 function constructPath(parentLinkMap, start, end) {
-  let currNodeStr = convertNodeToString(end);
+  let currNodeStr = nodeAsString(end);
   const endNodeWasDiscovered = parentLinkMap[currNodeStr];
   if (!endNodeWasDiscovered) {
     return [];
@@ -80,17 +80,23 @@ function constructPath(parentLinkMap, start, end) {
     result.push(currNodeStr);
     currNodeStr = parentLinkMap[currNodeStr];
   }
-  result.push(convertNodeToString(start));
+  result.push(nodeAsString(start));
   const reversedPath = result.reverse();
-  return reversedPath.map((item) => convertNodeToArr(item));
+  return reversedPath.map((item) => nodeAsArray(item));
 }
 
 function convertMazeToAdjacencyList(maze) {
   const adjacencyList = new Graph();
+  const isNode = (elem) => elem === 0;
+  const addEdgeIfNeeded = (node1AsArr, node2AsArr) => {
+    if (isNode(maze[node1AsArr[0]][node1AsArr[1]])) {
+      adjacencyList.addEdge(nodeAsString(node1AsArr), nodeAsString(node2AsArr));
+    }
+  };
 
   maze.forEach((row, i) => {
     row.forEach((elem, j) => {
-      if (elem === 0) {
+      if (isNode(elem)) {
         adjacencyList.addNode([i, j].toString());
       }
     });
@@ -98,19 +104,11 @@ function convertMazeToAdjacencyList(maze) {
 
   maze.forEach((row, i) => {
     row.forEach((elem, j) => {
-      if (elem === 0) {
-        if (maze[i - 1][j] === 0) {
-          adjacencyList.addEdge([i - 1, j].toString(), [i, j].toString());
-        }
-        if (maze[i + 1][j] === 0) {
-          adjacencyList.addEdge([i + 1, j].toString(), [i, j].toString());
-        }
-        if (maze[i][j - 1] === 0) {
-          adjacencyList.addEdge([i, j - 1].toString(), [i, j].toString());
-        }
-        if (maze[i][j + 1] === 0) {
-          adjacencyList.addEdge([i, j + 1].toString(), [i, j].toString());
-        }
+      if (isNode(elem)) {
+        addEdgeIfNeeded([i - 1, j], [i, j]);
+        addEdgeIfNeeded([i + 1, j], [i, j]);
+        addEdgeIfNeeded([i, j - 1], [i, j]);
+        addEdgeIfNeeded([i, j + 1], [i, j]);
       }
     });
   });
