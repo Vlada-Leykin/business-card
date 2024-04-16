@@ -7,6 +7,7 @@ class BinarySearchTree {
 
   insert(data) {
     const newNode = new Node(data);
+
     if (this.root === null) {
       this.root = newNode;
     } else {
@@ -30,12 +31,24 @@ class BinarySearchTree {
     }
   }
 
-  searchNode(data) {
-    if (this.root.data === data) {
-      return this.root;
-    }
+  search(data) {
+    const searchInTree = (rootNode) => {
+      if (!rootNode) {
+        return null;
+      }
 
-    return null;
+      if (data === rootNode.data) {
+        return rootNode;
+      } if (data < rootNode.data) {
+        return searchInTree(rootNode.left);
+      } if (data > rootNode.data) {
+        return searchInTree(rootNode.right);
+      }
+
+      return null;
+    };
+
+    return searchInTree(this.root);
   }
 }
 
