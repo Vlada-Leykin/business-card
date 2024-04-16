@@ -5,9 +5,28 @@ class BinarySearchTree {
     this.root = null;
   }
 
-  insertNode(data) {
+  insert(data) {
+    const newNode = new Node(data);
     if (this.root === null) {
-      this.root = new Node(data);
+      this.root = newNode;
+    } else {
+      const insertNodeToTree = (node, rootNode) => {
+        if (node.data < rootNode.data) {
+          if (!rootNode.left) {
+            rootNode.left = node;
+          } else {
+            insertNodeToTree(node, rootNode.left);
+          }
+        }
+        if (node.data > rootNode.data) {
+          if (!rootNode.right) {
+            rootNode.right = node;
+          } else {
+            insertNodeToTree(node, rootNode.right);
+          }
+        }
+      };
+      insertNodeToTree(newNode, this.root);
     }
   }
 
