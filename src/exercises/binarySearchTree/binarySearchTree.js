@@ -55,26 +55,39 @@ class BinarySearchTree {
     const isLeafNode = (node) => !node.left && !node.right;
     const hasOnlyLeftChild = (node) => node.left && !node.right;
     const hasOnlyRightChild = (node) => !node.left && node.right;
+    const hasBothChildren = (node) => node.left && node.right;
 
-    const searchInTreeAndDelete = (rootNode) => {
-      if (data === rootNode.data) {
+    // refactor later
+    const findMaxValueInTree = (rootNode) => {
+      if (rootNode.right === null) {
+        return rootNode;
+      }
+      return findMaxValueInTree(rootNode.right);
+    };
+
+    const searchInTreeAndDelete = (rootNode, dataToDelete) => {
+      if (dataToDelete === rootNode.data) {
         if (isLeafNode(rootNode)) {
           return null;
         } if (hasOnlyLeftChild(rootNode)) {
           return rootNode.left;
         } if (hasOnlyRightChild(rootNode)) {
           return rootNode.right;
+        } if (hasBothChildren(rootNode)) {
+          const maxValueNode = findMaxValueInTree(rootNode.left);
+          rootNode.data = maxValueNode.data;
+          rootNode.left = searchInTreeAndDelete(rootNode.left, maxValueNode.data);
         }
-      } if (data < rootNode.data) {
-        rootNode.left = searchInTreeAndDelete(rootNode.left);
-      } else if (data > rootNode.data) {
-        rootNode.right = searchInTreeAndDelete(rootNode.right);
+      } else if (dataToDelete < rootNode.data) {
+        rootNode.left = searchInTreeAndDelete(rootNode.left, dataToDelete);
+      } else if (dataToDelete > rootNode.data) {
+        rootNode.right = searchInTreeAndDelete(rootNode.right, dataToDelete);
       }
 
       return rootNode;
     };
 
-    this.root = searchInTreeAndDelete(this.root);
+    this.root = searchInTreeAndDelete(this.root, data);
   }
 }
 

@@ -173,7 +173,7 @@ describe('Binary Search Tree', function () {
                 binarySearchTree.insert(3);
 
                 binarySearchTree.delete(3);
-                
+
                 expect(binarySearchTree.root.data).toEqual(5);
                 expect(binarySearchTree.root.left).toBeNull();
                 expect(binarySearchTree.root.right).toBeNull();
@@ -185,7 +185,7 @@ describe('Binary Search Tree', function () {
                 binarySearchTree.insert(30);
 
                 binarySearchTree.delete(30);
-                
+
                 expect(binarySearchTree.root.data).toEqual(5);
                 expect(binarySearchTree.root.left).toBeNull();
                 expect(binarySearchTree.root.right).toBeNull();
@@ -198,12 +198,12 @@ describe('Binary Search Tree', function () {
                 binarySearchTree.insert(10);
 
                 binarySearchTree.delete(10);
-                
+
                 expect(binarySearchTree.root.data).toEqual(5);
                 expect(binarySearchTree.root.right.data).toEqual(7);
                 expect(binarySearchTree.root.right.right).toBeNull();
                 expect(binarySearchTree.root.right.left).toBeNull();
-            });            
+            });
         });
 
         describe('one child case', () => {
@@ -213,7 +213,7 @@ describe('Binary Search Tree', function () {
                 binarySearchTree.insert(3);
 
                 binarySearchTree.delete(5);
-                
+
                 expect(binarySearchTree.root.data).toEqual(3);
                 expect(binarySearchTree.root.left).toBeNull();
                 expect(binarySearchTree.root.right).toBeNull();
@@ -225,7 +225,7 @@ describe('Binary Search Tree', function () {
                 binarySearchTree.insert(30);
 
                 binarySearchTree.delete(5);
-                
+
                 expect(binarySearchTree.root.data).toEqual(30);
                 expect(binarySearchTree.root.left).toBeNull();
                 expect(binarySearchTree.root.right).toBeNull();
@@ -238,12 +238,83 @@ describe('Binary Search Tree', function () {
                 binarySearchTree.insert(15);
 
                 binarySearchTree.delete(30);
-                
+
                 expect(binarySearchTree.root.data).toEqual(5);
                 expect(binarySearchTree.root.left).toBeNull();
                 expect(binarySearchTree.root.right.data).toEqual(15);
                 expect(binarySearchTree.root.right.left).toBeNull();
                 expect(binarySearchTree.root.right.right).toBeNull();
+            });
+        });
+
+        describe('two children case', () => {
+            it('should place left child instead of the root', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+                binarySearchTree.insert(3);
+                binarySearchTree.insert(6);
+
+                binarySearchTree.delete(5);
+
+                expect(binarySearchTree.root.data).toEqual(3);
+                expect(binarySearchTree.root.left).toBeNull();
+                expect(binarySearchTree.root.right.data).toEqual(6);
+                expect(binarySearchTree.root.right.right).toBeNull();
+                expect(binarySearchTree.root.right.left).toBeNull();
+            })
+
+            describe('replacing deleted value with leaf\'s value', () => {
+                it('should replace root with the biggest value on the left, and delete the left\'s biggest value node', () => {
+                    let binarySearchTree = new BinarySearchTree()
+                    binarySearchTree.insert(5);
+                    binarySearchTree.insert(6);
+                    binarySearchTree.insert(3);
+                    binarySearchTree.insert(4);
+
+
+                    binarySearchTree.delete(5);
+
+                    expect(binarySearchTree.root.data).toEqual(4);
+                    expect(binarySearchTree.root.left.data).toEqual(3);
+                    expect(binarySearchTree.root.right.data).toEqual(6);
+                    expect(binarySearchTree.root.left.left).toBeNull();
+                    expect(binarySearchTree.root.left.right).toBeNull();
+                    expect(binarySearchTree.root.right.left).toBeNull();
+                    expect(binarySearchTree.root.right.right).toBeNull();
+                });
+            });
+
+            describe('replacing deleted value with middle node\'s value', () => {
+                // input:
+                //          5
+                //         /  \
+                //        3    6
+                //       / 
+                //      1 
+
+                // result:
+                //          3
+                //         /  \
+                //        1    6
+ 
+                it('should replace root with the biggest value on the left, and delete the left\'s biggest value node', () => {
+                    let binarySearchTree = new BinarySearchTree()
+                    binarySearchTree.insert(5);
+                    binarySearchTree.insert(6);
+                    binarySearchTree.insert(3);
+                    binarySearchTree.insert(1);
+
+
+                    binarySearchTree.delete(5);
+
+                    expect(binarySearchTree.root.data).toEqual(3);
+                    expect(binarySearchTree.root.left.data).toEqual(1);
+                    expect(binarySearchTree.root.right.data).toEqual(6);
+                    expect(binarySearchTree.root.left.left).toBeNull();
+                    expect(binarySearchTree.root.left.right).toBeNull();
+                    expect(binarySearchTree.root.right.left).toBeNull();
+                    expect(binarySearchTree.root.right.right).toBeNull();
+                });
             });
         });
     });
