@@ -129,8 +129,8 @@ describe('Binary Search Tree', function () {
             binarySearchTree.insert(3);
             binarySearchTree.insert(4);
             binarySearchTree.insert(6);
-        })
-        
+        });
+
         it('should find root node', function () {
             let root = binarySearchTree.search(5);
             expect(root.data).toEqual(5);
@@ -154,6 +154,97 @@ describe('Binary Search Tree', function () {
         it('should return null if value does not exists in binary search tree', function () {
             let node = binarySearchTree.search(100);
             expect(node).toBeNull;
+        });
+    });
+
+    describe('delete', function () {
+        describe('leaf case', () => {
+            it('should delete the root', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+
+                binarySearchTree.delete(5);
+                expect(binarySearchTree.root).toBeNull();
+            });
+
+            it('should delete the root\'s left only child', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+                binarySearchTree.insert(3);
+
+                binarySearchTree.delete(3);
+                
+                expect(binarySearchTree.root.data).toEqual(5);
+                expect(binarySearchTree.root.left).toBeNull();
+                expect(binarySearchTree.root.right).toBeNull();
+            });
+
+            it('should delete the root\'s right only child', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+                binarySearchTree.insert(30);
+
+                binarySearchTree.delete(30);
+                
+                expect(binarySearchTree.root.data).toEqual(5);
+                expect(binarySearchTree.root.left).toBeNull();
+                expect(binarySearchTree.root.right).toBeNull();
+            });
+
+            it('should delete the a leaf on the 3 level', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+                binarySearchTree.insert(7);
+                binarySearchTree.insert(10);
+
+                binarySearchTree.delete(10);
+                
+                expect(binarySearchTree.root.data).toEqual(5);
+                expect(binarySearchTree.root.right.data).toEqual(7);
+                expect(binarySearchTree.root.right.right).toBeNull();
+                expect(binarySearchTree.root.right.left).toBeNull();
+            });            
+        });
+
+        describe('one child case', () => {
+            it('should put left node on the root place', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+                binarySearchTree.insert(3);
+
+                binarySearchTree.delete(5);
+                
+                expect(binarySearchTree.root.data).toEqual(3);
+                expect(binarySearchTree.root.left).toBeNull();
+                expect(binarySearchTree.root.right).toBeNull();
+            });
+
+            it('should put right node on the root place', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+                binarySearchTree.insert(30);
+
+                binarySearchTree.delete(5);
+                
+                expect(binarySearchTree.root.data).toEqual(30);
+                expect(binarySearchTree.root.left).toBeNull();
+                expect(binarySearchTree.root.right).toBeNull();
+            });
+
+            it('should reconnect tree in case of middle deletion', () => {
+                let binarySearchTree = new BinarySearchTree()
+                binarySearchTree.insert(5);
+                binarySearchTree.insert(30);
+                binarySearchTree.insert(15);
+
+                binarySearchTree.delete(30);
+                
+                expect(binarySearchTree.root.data).toEqual(5);
+                expect(binarySearchTree.root.left).toBeNull();
+                expect(binarySearchTree.root.right.data).toEqual(15);
+                expect(binarySearchTree.root.right.left).toBeNull();
+                expect(binarySearchTree.root.right.right).toBeNull();
+            });
         });
     });
 });
