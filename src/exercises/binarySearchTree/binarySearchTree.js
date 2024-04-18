@@ -57,23 +57,17 @@ class BinarySearchTree {
     const hasOnlyRightChild = (node) => !node.left && node.right;
     const hasBothChildren = (node) => node.left && node.right;
 
-    // refactor later
-    const findMaxValueInTree = (rootNode) => {
-      if (rootNode.right === null) {
-        return rootNode;
-      }
-      return findMaxValueInTree(rootNode.right);
-    };
+    const findMaxValueInTree = (rootNode) => ((rootNode.right === null)
+      ? rootNode
+      : findMaxValueInTree(rootNode.right));
 
     const searchInTreeAndDelete = (rootNode, dataToDelete) => {
       if (dataToDelete === rootNode.data) {
-        if (isLeafNode(rootNode)) {
-          return null;
-        } if (hasOnlyLeftChild(rootNode)) {
-          return rootNode.left;
-        } if (hasOnlyRightChild(rootNode)) {
-          return rootNode.right;
-        } if (hasBothChildren(rootNode)) {
+        if (isLeafNode(rootNode)) return null;
+        if (hasOnlyLeftChild(rootNode)) return rootNode.left;
+        if (hasOnlyRightChild(rootNode)) return rootNode.right;
+
+        if (hasBothChildren(rootNode)) {
           const maxValueNode = findMaxValueInTree(rootNode.left);
           rootNode.data = maxValueNode.data;
           rootNode.left = searchInTreeAndDelete(rootNode.left, maxValueNode.data);
