@@ -6,27 +6,28 @@ class BinarySearchTree {
   }
 
   insert(data) {
+    const insertNodeToTree = (rootNode, node) => {
+      if (node.data < rootNode.data) {
+        if (!rootNode.left) {
+          rootNode.left = node;
+        } else {
+          insertNodeToTree(rootNode.left, node);
+        }
+      }
+      if (node.data > rootNode.data) {
+        if (!rootNode.right) {
+          rootNode.right = node;
+        } else {
+          insertNodeToTree(rootNode.right, node);
+        }
+      }
+    };
+
     const newNode = new Node(data);
 
     if (this.root === null) {
       this.root = newNode;
     } else {
-      const insertNodeToTree = (rootNode, node) => {
-        if (node.data < rootNode.data) {
-          if (!rootNode.left) {
-            rootNode.left = node;
-          } else {
-            insertNodeToTree(rootNode.left, node);
-          }
-        }
-        if (node.data > rootNode.data) {
-          if (!rootNode.right) {
-            rootNode.right = node;
-          } else {
-            insertNodeToTree(rootNode.right, node);
-          }
-        }
-      };
       insertNodeToTree(this.root, newNode);
     }
   }
@@ -37,13 +38,9 @@ class BinarySearchTree {
         return null;
       }
 
-      if (data === rootNode.data) {
-        return rootNode;
-      } if (data < rootNode.data) {
-        return searchInTree(rootNode.left);
-      } if (data > rootNode.data) {
-        return searchInTree(rootNode.right);
-      }
+      if (data === rootNode.data) return rootNode;
+      if (data < rootNode.data) return searchInTree(rootNode.left);
+      if (data > rootNode.data) return searchInTree(rootNode.right);
 
       return null;
     };
