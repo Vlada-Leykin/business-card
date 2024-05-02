@@ -1,11 +1,16 @@
 import React from 'react';
-import ProfilePicture from '../images/profilepic.jpg';
+import ProfilePicture from '../assets/profilepic.jpg';
 
 function Header() {
   return (
-    <header className="container d-flex">
-      <img src={ProfilePicture} alt="Vlada Leykin" width="40" height="40" />
-      <h1>Vlada Leykin</h1>
+    <header className="row justify-content-start">
+      <div className="container col-auto">
+        <img src={ProfilePicture} alt="Vlada Leykin" width="50" height="50" />
+      </div>
+      <div className="container col-auto">
+        <a className='btn' href='#about_me'>About me</a>
+        <a className='btn' href='#cv'>CV</a>
+      </div>
     </header>
   );
 }

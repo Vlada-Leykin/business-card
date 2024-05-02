@@ -12,13 +12,18 @@ export default (env, argv) => {
     output: {
       filename: 'bundle.js',
       path: path.resolve(__dirname, 'dist'),
-     clean: true,
+      assetModuleFilename: "assets/[name][ext]",
+      clean: true,
     },
     module: {
       rules: [
         {
-          test: /\.(png|jpg|gif|svg)$/,
-          type: 'asset/resource',
+          test: /\.(pdf|jpg)$/,
+          include: path.resolve(__dirname, "src"),
+          type: "asset/resource",
+          generator: {
+            filename: "assets/[name][ext]",
+          },
         },
         {
           test: /\.js$/,
