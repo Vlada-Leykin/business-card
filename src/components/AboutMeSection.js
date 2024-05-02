@@ -3,7 +3,7 @@ import React from 'react';
 function AboutMeSection() {
   return (
     <section className='container' id="about_me">
-      <div className='my-5'>
+      <div className='mt-3 mb-5'>
         <p className='display-2'>Hey,</p>
         <h1 className='display-3'>I&#39;m Vlada Leykin</h1>
       </div>

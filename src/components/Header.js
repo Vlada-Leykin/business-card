@@ -5,10 +5,10 @@ function Header() {
   return (
     <header className="container my-3">
       <div className="row justify-content-between">
-      <div className="col-sm-4" >
-        <img src={ProfilePicture} alt="Vlada Leykin" width="50" height="50" />
+      <div className="col-sm-4 text-center text-sm-start" >
+        <img src={ProfilePicture} alt="Vlada Leykin" width="65" height="65" />
       </div>
-      <div className="col-sm-4">
+      <div className="col-sm-4 text-center text-sm-end">
         <a className='btn' href='#about_me'>About me</a>
         <a className='btn' href='#cv'>CV</a>
       </div>
