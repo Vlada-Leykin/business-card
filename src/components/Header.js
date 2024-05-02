@@ -4,7 +4,7 @@ import ProfilePicture from '../assets/profilepic.jpg';
 function Header() {
   return (
     <header className="container my-3">
-      <div className="row justify-content-between">
+      <div className="row justify-content-between align-items-center">
       <div className="col-sm-4 text-center text-sm-start" >
         <img src={ProfilePicture} alt="Vlada Leykin" width="65" height="65" />
       </div>
