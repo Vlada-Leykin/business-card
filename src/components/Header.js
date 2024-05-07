@@ -3,7 +3,7 @@ import ProfilePicture from '../assets/profilepic.jpg';
 
 function Header() {
   return (
-    <header className="container my-3">
+    <header className="container mb-3 sticky-top bg-white">
       <nav className="navbar navbar-expand-sm">
         <div className="container-fluid">
           <a className="navbar-brand" href="#about_me">
@@ -20,7 +20,7 @@ function Header() {
           >
             <span className="navbar-toggler-icon" />
           </button>
-          <div className="navbar-collapse collapse" id="navbarNavAltMarkup">
+          <div className="navbar-collapse collapse justify-content-end" id="navbarNavAltMarkup">
             <ul className="navbar-nav">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#about_me">About me</a>
