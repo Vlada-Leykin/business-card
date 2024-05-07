@@ -2,13 +2,13 @@ import React from 'react';
 
 function AboutMeSection() {
   return (
-    <section className='container' id="about_me">
-      <div className='mt-3 mb-5'>
-        <p className='display-2'>Hey,</p>
-        <h1 className='display-3'>I&#39;m Vlada Leykin</h1>
+    <section className="container" id="about_me">
+      <div className="mt-3 mb-5">
+        <p className="display-2">Hey,</p>
+        <h1 className="display-3">I&#39;m Vlada Leykin</h1>
       </div>
       <h3>TL;DR</h3>
-      <p className='lead'>
+      <p className="lead">
         I&#39;m a Software Engineer with 7 years of experience.
         I&#39;m passionate about designing and developing high-quality software solutions.
       </p>
