@@ -2,7 +2,8 @@
 import './scss/styles.scss';
 
 // Import all of Bootstrap's JS
-// import * as bootstrap from 'bootstrap';
+// eslint-disable-next-line no-unused-vars
+import * as bootstrap from 'bootstrap';
 
 import React from 'react';
 import { createRoot } from 'react-dom/client';
