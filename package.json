@@ -1,5 +1,6 @@
 {
   "name": "back2work",
+  "homepage": "https://vlada-leykin.github.io/business-card/",
   "version": "1.0.0",
   "description": "My project of recovering my knowledge as a Software Engineer after a long maternity leave",
   "main": "index.js",
