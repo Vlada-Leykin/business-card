@@ -10,7 +10,10 @@
     "build": "webpack --mode=production",
     "test": "jasmine",
     "lint": "eslint ./src",
-    "lint-fix": "eslint ./src --fix --color"
+    "lint-fix": "eslint ./src --fix --color",
+    "predeploy": "npm run build", 
+    "deploy": "gh-pages -d build" 
+
   },
   "author": "Vlada Leykin",
   "license": "ISC",
