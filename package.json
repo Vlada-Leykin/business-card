@@ -12,9 +12,9 @@
     "test": "jasmine",
     "lint": "eslint ./src",
     "lint-fix": "eslint ./src --fix --color",
-    "predeploy": "npm run build", 
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "pre-commit": "node scripts/pre-commit.cjs"
+    "prepare": "husky"
   },
   "author": "Vlada Leykin",
   "license": "ISC",
