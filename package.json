@@ -14,7 +14,7 @@
     "lint-fix": "eslint ./src --fix --color",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "prepare": "husky"
+    "prepare": "node .husky/install.mjs"
   },
   "author": "Vlada Leykin",
   "license": "ISC",
