@@ -14,8 +14,7 @@
     "lint-fix": "eslint ./src --fix --color",
     "predeploy": "npm run build", 
     "deploy": "gh-pages -d build",
-    "pre-commit": "node scripts/pre-commit.js"
-
+    "pre-commit": "node scripts/pre-commit.cjs"
   },
   "author": "Vlada Leykin",
   "license": "ISC",
