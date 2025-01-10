@@ -18,7 +18,7 @@ export default (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(pdf|jpg)$/,
+          test: /\.(pdf|jpg|png)$/,
           include: path.resolve(__dirname, "src"),
           type: "asset/resource",
           generator: {
