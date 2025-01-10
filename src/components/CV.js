@@ -6,7 +6,7 @@ function CV() {
     <section className="container" id="cv">
       <h3>Curriculum Vitae</h3>
       <p>
-        You can download
+        Check out&nbsp;
         <a href={cv} download={cv}>my CV</a>
       </p>
     </section>
